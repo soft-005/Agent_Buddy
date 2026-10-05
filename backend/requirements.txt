@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+faster-whisper
+websockets
+anthropic
+openai
+python-dotenv
+# Long-term memory file (MIT, github.com/JustVugg/mnem). Pinned commit; needs git to install.
+mnem @ git+https://github.com/JustVugg/mnem.git@df357585481721d4df4cbdfb5924ab9afe603281

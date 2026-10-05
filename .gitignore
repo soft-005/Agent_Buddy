@@ -1,0 +1,52 @@
+# ---------- Secrets and personal data ----------
+# API keys and local settings (copy backend/.env.example to start)
+.env
+.env.*
+!.env.example
+# Buddy's memory, saved conversations and their archive (personal)
+backend/data/
+# Launcher logs (include what Buddy heard) and the backend pid
+logs/
+*.log
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---------- Node / Electron ----------
+node_modules/
+desktop/dist/
+desktop/out/
+
+# ---------- Flutter / Android (mobile/.gitignore has the rest) ----------
+*.apk
+*.aab
+mobile/build/
+
+# ---------- Large or personal assets ----------
+# Avatars are big; keep them out of git (desktop/assets/models/README.md explains where they go)
+*.vrm
+
+# ---------- Machine-specific files ----------
+# Desktop shortcuts hold this PC's paths (install-shortcuts.ps1 recreates them)
+*.lnk
+# Claude Code's local settings
+.claude/
+
+# ---------- OS / editor ----------
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# ---------- Local notes and archives ----------
+context.txt
+*.zip
+CLAUDE.md

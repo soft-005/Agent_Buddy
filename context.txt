@@ -90,3 +90,88 @@ Slightly more robust: use mDNS/Bonjour (e.g., mypc.local) so you don't have to h
 Skip anything heavier (Ably/Pusher/cloud realtime) — that's solving a problem you don't have at this scale.
 
 My actual recommendation: since it's just you, and both devices are usually on the same router — go with Option A (backend on PC). It's simpler, free, faster, and you already have the horsepower sitting there. Save the VPS for if/when you want access away from home.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////
+done:
+-buddy resizing and better user friendlines or experience (bring text to front and close when done, and more). maybe can dock hiding or sticking its head out from screen corner when idel for x period.
+-special key detect. e.g space bar holding to start recording.
+-adding light-weight memory .md file? for important and repeaded stuffs.
+-can i change or modify the sound/speech tone
+-make a easy script, or shortcut link file to click and launch or end/exit/hide buddy program from desktop.
+-check for any errors existing prior or any you might have introduced recently and fix, also give suggestions for improvement and customizations, thanks.
+-make buddy for mobile andriod (flutter)
+-add more permission to buddy, would like it to run tasks, open apps, and more. with aproval guildrail or restricted folder view.
+-at mobile can buddy still show outside app like widget does and moveable
+-at mobile add gesture , e.g hold vol button to speak, etc
+
+add features (desktop and mobile):
+- swiching between avaters
+-Mood expressions: the model could tag each reply with a mood so the avatar's face matches it.
+-Hands-free talking: voice detection or a wake word would remove the need to hold a key.
+-Eye contact: the avatar's eyes could follow your mouse pointer.
+-Saved conversations: keeping the conversation across restarts would let Buddy pick up where you left off.
+
+
+-check for any errors existing prior or any you might have introduced recently and fix.
+-make a readme file , add how to use/setup and more helpful info. keep short and detailed.
+-buddy port number should be 8818, and adjtable from app, and settings backend, etc.
+- make able to switch model from providers by its self on cmd/prompt.
+
+//
+
+todo:
+-add mcp features for browsering and collecting info from the web
+
+
+Features worth adding next:
+
+-A natural voice: Piper running locally would sound much more natural, and it would drive the mouth movement properly.
+-Start with Windows: a shortcut in your Startup folder would launch Buddy at login.
+
+
+------------------
+Suggestions
+Speed:
+
+Try Gemma 3n E4B, which should answer faster than Qwen on this laptop. Switch with LLM_MODEL in your backend settings file.
+LM Studio unloads Qwen after 60 idle minutes, so the next reply takes extra time while it reloads. Raise that time limit in LM Studio if it bothers you.
+Set WHISPER_MODEL=base for quicker transcription, with slightly lower accuracy.
+Customization:
+
+Personality: edit SYSTEM_PROMPT in config.py to change Buddy's name, character and style.
+Creativity: change temperature in providers.json. Lower values give steadier answers, higher values more creative ones.
+Peek height: PEEK_FRACTION in avatar.js sets how much of the head shows when Buddy hides.
+Window sizes: the size presets are in settings.js.
+Features 
+
+
+
+---
+cd mobile
+flutter build apk --release --split-per-abi
+
+build\app\outputs\flutter-apk\app-arm64-v8a-release.apk
+
+
+#powershell -ExecutionPolicy Bypass -File buddy.ps1 restart

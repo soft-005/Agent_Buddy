@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' blob: ws: wss: http: https:; img-src 'self' data: blob:; media-src 'self' blob:">
+  <title>Buddy</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "../node_modules/three/build/three.module.js",
+      "three/addons/": "../node_modules/three/examples/jsm/",
+      "three/examples/jsm/": "../node_modules/three/examples/jsm/",
+      "@pixiv/three-vrm": "../node_modules/@pixiv/three-vrm/lib/three-vrm.module.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <canvas id="avatar"></canvas>
+
+  <div id="bubble" class="interactive hidden">
+    <div id="bubble-tools"></div>
+    <span id="bubble-text"></span>
+    <button id="bubble-close" title="Close">&times;</button>
+  </div>
+
+  <!-- Startup loader: shown until the backend, speech recognition and the model are ready. -->
+  <div id="loader" class="interactive" role="status" aria-live="polite">
+    <div class="loader-head">
+      <div class="loader-spinner"></div>
+      <span id="loader-title">Buddy is waking up&hellip;</span>
+      <span id="loader-time"></span>
+    </div>
+    <ul id="loader-steps">
+      <li data-step="backend">Starting Buddy</li>
+      <li data-step="stt">Loading speech recognition</li>
+      <li data-step="llm">Loading the language model</li>
+    </ul>
+    <div id="loader-hint"></div>
+  </div>
+
+  <!-- Approval: Buddy asks before an action set to "ask" in backend/tools.json. -->
+  <div id="approval" class="interactive hidden" role="alertdialog" aria-labelledby="approval-what">
+    <div class="approval-head">Buddy wants to <span id="approval-time"></span></div>
+    <div id="approval-what"></div>
+    <pre id="approval-detail"></pre>
+    <div class="approval-buttons">
+      <button id="approval-deny">Deny</button>
+      <button id="approval-allow">Allow</button>
+    </div>
+  </div>
+
+  <!-- Connection (tray: Connection…): Buddy's port on this PC, or another PC's address. -->
+  <div id="connection" class="interactive hidden" role="dialog" aria-labelledby="connection-title">
+    <div id="connection-title" class="approval-head">Connection</div>
+    <label for="connection-input">Port on this PC, or another PC's address</label>
+    <input id="connection-input" type="text" autocomplete="off" spellcheck="false" placeholder="8818 or 192.168.1.42:8818">
+    <div id="connection-message"></div>
+    <div class="approval-buttons">
+      <button id="connection-cancel">Cancel</button>
+      <button id="connection-save">Save</button>
+    </div>
+  </div>
+
+  <div id="controls" class="interactive" title="Ctrl + mouse wheel to resize Buddy">
+    <div id="drag" title="Drag to move">&#x2630;</div>
+    <input id="text-input" type="text" placeholder="Type to Buddy..." autocomplete="off">
+    <button id="talk" title="Hold to talk">&#x1F399;</button>
+    <span id="status" title="Connection status"></span>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

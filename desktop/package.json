@@ -1,0 +1,18 @@
+{
+  "name": "buddy-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Always-on-top 3D avatar overlay for Buddy",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "@pixiv/three-vrm": "^3.4.0",
+    "three": "^0.170.0",
+    "uiohook-napi": "^1.5.5"
+  },
+  "devDependencies": {
+    "electron": "^44.4.5"
+  }
+}

@@ -1,0 +1,286 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  user-select: none;
+}
+
+#avatar {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* the avatar never blocks clicks */
+}
+
+/* The bubble and controls sit in front of the avatar. */
+#bubble {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  max-height: 40%;
+  overflow-y: auto;
+  padding: 10px 30px 10px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #1d1d1f;
+  font-size: 14px;
+  line-height: 1.4;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+  user-select: text;
+  animation: pop-in 0.15s ease-out;
+}
+#bubble.hidden { display: none; }
+#bubble.user { background: rgba(220, 235, 255, 0.96); font-style: italic; }
+
+#bubble-close {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #888;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+#bubble-close:hover { background: rgba(0, 0, 0, 0.08); color: #333; }
+
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Docked: only the avatar's head peeks out; text and controls are hidden. */
+body.docked #bubble,
+body.docked #controls,
+body.docked #loader { display: none; }
+
+/* ---------- Actions Buddy took (top of the bubble) ---------- */
+#bubble-tools { font-size: 12px; color: #5b6475; }
+#bubble-tools:empty { display: none; }
+#bubble-tools div { margin-bottom: 3px; }
+#bubble-tools .failed { color: #b4232a; }
+
+/* ---------- Approval card (above the controls) ---------- */
+#approval {
+  position: absolute;
+  z-index: 3;
+  left: 12px;
+  right: 12px;
+  bottom: 60px;
+  padding: 11px 14px 12px;
+  border-radius: 14px;
+  background: rgba(24, 26, 34, 0.94);
+  color: #eef1f7;
+  font-size: 13px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(245, 165, 36, 0.55);
+  animation: pop-in 0.15s ease-out;
+}
+#approval.hidden { display: none; }
+body.docked #approval { display: none; }
+.approval-head { display: flex; color: #f5a524; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+#approval-time { margin-left: auto; color: #9aa3b5; font-weight: 400; text-transform: none; font-variant-numeric: tabular-nums; }
+#approval-what { margin: 4px 0 6px; font-size: 15px; font-weight: 600; }
+#approval-detail {
+  margin: 0 0 9px;
+  max-height: 96px;
+  overflow: auto;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #c8cede;
+  font: 12px/1.35 Consolas, "Cascadia Mono", monospace;
+  white-space: pre-wrap;
+  word-break: break-all;
+  user-select: text;
+}
+#approval-detail:empty { display: none; }
+.approval-buttons { display: flex; gap: 8px; justify-content: flex-end; }
+.approval-buttons button {
+  border: none;
+  border-radius: 16px;
+  padding: 7px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+#approval-deny { background: rgba(255, 255, 255, 0.12); color: #eef1f7; }
+#approval-allow { background: #30a46c; color: white; }
+#approval-deny:hover { background: rgba(255, 255, 255, 0.2); }
+#approval-allow:hover { background: #2b9461; }
+
+/* ---------- Connection card (tray: Connection…) ---------- */
+#connection {
+  position: absolute;
+  z-index: 4;
+  left: 12px;
+  right: 12px;
+  bottom: 60px;
+  padding: 11px 14px 12px;
+  border-radius: 14px;
+  background: rgba(24, 26, 34, 0.96);
+  color: #eef1f7;
+  font-size: 13px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(122, 162, 255, 0.55);
+  animation: pop-in 0.15s ease-out;
+}
+#connection.hidden, body.docked #connection { display: none; }
+#connection .approval-head { color: #7aa2ff; }
+#connection label { display: block; margin: 6px 0 5px; color: #c8cede; font-size: 12px; }
+#connection-input {
+  box-sizing: border-box;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  padding: 7px 9px;
+  background: rgba(255, 255, 255, 0.92);
+  font: 13px Consolas, "Cascadia Mono", monospace;
+  user-select: text;
+}
+#connection-message { min-height: 16px; margin: 6px 0 8px; color: #9aa3b5; font-size: 12px; }
+#connection-message.failed { color: #ffb3b5; }
+#connection-save { background: #4a7dff; color: white; }
+#connection-save:hover { background: #3d6ae0; }
+#connection-cancel { background: rgba(255, 255, 255, 0.12); color: #eef1f7; }
+#connection-cancel:hover { background: rgba(255, 255, 255, 0.2); }
+
+/* ---------- Startup loader (above the controls) ---------- */
+#loader {
+  position: absolute;
+  z-index: 2;
+  left: 12px;
+  right: 12px;
+  bottom: 60px;
+  padding: 10px 14px 9px;
+  border-radius: 14px;
+  background: rgba(24, 26, 34, 0.88);
+  color: #eef1f7;
+  font-size: 12.5px;
+  line-height: 1.35;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+#loader.hidden { display: none; }
+#loader.fading { opacity: 0; transform: translateY(6px); }
+
+.loader-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 13.5px;
+  margin-bottom: 6px;
+}
+#loader-time { margin-left: auto; font-weight: 400; color: #9aa3b5; font-variant-numeric: tabular-nums; }
+
+.loader-spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #7aa2ff;
+  animation: spin 0.9s linear infinite;
+}
+#loader.ready .loader-spinner { border-color: #30a46c; animation: none; }
+
+#loader-steps { list-style: none; margin: 0; padding: 0; }
+#loader-steps li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 0;
+  color: #8a93a6; /* waiting */
+}
+#loader-steps li::before {
+  content: "";
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #4a5163;
+  box-sizing: border-box;
+}
+#loader-steps li.active { color: #eef1f7; }
+#loader-steps li.active::before { border-color: rgba(122, 162, 255, 0.25); border-top-color: #7aa2ff; animation: spin 0.9s linear infinite; }
+#loader-steps li.done { color: #b9c2d3; }
+#loader-steps li.done::before { border: none; background: #30a46c; box-shadow: inset 0 0 0 3px #30a46c; }
+#loader-steps li.error { color: #ffb3b5; }
+#loader-steps li.error::before { border: none; background: #e5484d; }
+
+#loader-hint { margin-top: 5px; color: #c8cede; font-size: 12px; }
+#loader-hint:empty { display: none; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#controls {
+  position: absolute;
+  z-index: 2;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 22px;
+  background: rgba(30, 30, 36, 0.78);
+  opacity: 0.35;
+  transition: opacity 0.2s;
+}
+#controls:hover, #controls:focus-within { opacity: 1; }
+
+#drag {
+  -webkit-app-region: drag;
+  cursor: move;
+  color: #ccc;
+  padding: 0 6px;
+}
+
+#text-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  border-radius: 16px;
+  padding: 7px 10px;
+  background: rgba(255, 255, 255, 0.92);
+  font-size: 13px;
+}
+
+#talk {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: #4a7dff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+#talk.listening { background: #e5484d; }
+/* Hands-free on: a green ring. It pulses while the wake word mode hears someone talking. */
+body.handsfree #talk { box-shadow: 0 0 0 2px #30a46c; }
+#talk.hearing { animation: hearing 1.2s ease-in-out infinite; }
+@keyframes hearing { 50% { box-shadow: 0 0 0 5px rgba(48, 164, 108, 0.5); } }
+
+#status {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #888;
+  margin-right: 4px;
+}
+#status.online { background: #30a46c; }
+#status.offline { background: #e5484d; }

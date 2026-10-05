@@ -1,0 +1,12 @@
+{
+  "name": "buddy-mobile-avatar",
+  "private": true,
+  "type": "module",
+  "description": "Bundles the desktop avatar code for the Android app's web view",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

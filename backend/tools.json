@@ -1,0 +1,20 @@
+{
+    "_help": "What Buddy may do on this PC. approval: auto = runs without asking, ask = needs Allow in the Buddy app, off = Buddy can't use it. File tools only work inside allowed_folders (~ is your user folder). Restart the backend after editing.",
+    "enabled": true,
+    "allowed_folders": [
+        "~/Documents/Buddy"
+    ],
+    "approval": {
+        "get_time": "auto",
+        "list_folder": "auto",
+        "read_file": "auto",
+        "open_file": "ask",
+        "write_file": "ask",
+        "open_app": "ask",
+        "open_url": "ask",
+        "search_web": "ask",
+        "run_command": "ask"
+    },
+    "approval_timeout_seconds": 60,
+    "command_timeout_seconds": 30
+}
